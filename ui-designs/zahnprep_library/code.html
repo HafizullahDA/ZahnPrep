@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Study Workspace - ZahnPrep</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface-variant": "#3e494a",
+              "secondary-fixed": "#cbe7f6",
+              "surface-container-low": "#f1f4f4",
+              "surface-container-highest": "#dfe3e3",
+              "on-tertiary-container": "#fff1e9",
+              "surface-tint": "#006970",
+              "tertiary-container": "#a05f2e",
+              "surface-dim": "#d7dbdb",
+              "primary-fixed": "#96f1fa",
+              "on-tertiary-fixed-variant": "#6f3808",
+              "surface-variant": "#dfe3e3",
+              "on-background": "#181c1d",
+              "primary-container": "#007b83",
+              "on-primary-fixed": "#002022",
+              "surface": "#f6fafa",
+              "on-secondary-fixed-variant": "#304a56",
+              "error": "#ba1a1a",
+              "primary": "#006067",
+              "on-tertiary": "#ffffff",
+              "inverse-primary": "#7ad5dd",
+              "background": "#f6fafa",
+              "surface-container-high": "#e5e9e9",
+              "outline": "#6e797a",
+              "on-secondary": "#ffffff",
+              "on-secondary-fixed": "#011e29",
+              "secondary-fixed-dim": "#afcbd9",
+              "secondary": "#48626f",
+              "on-secondary-container": "#4e6875",
+              "surface-container": "#ebeeef",
+              "on-surface": "#181c1d",
+              "inverse-on-surface": "#eef1f1",
+              "error-container": "#ffdad6",
+              "tertiary-fixed": "#ffdcc6",
+              "primary-fixed-dim": "#7ad5dd",
+              "outline-variant": "#bdc9ca",
+              "surface-bright": "#f6fafa",
+              "on-error": "#ffffff",
+              "tertiary": "#834718",
+              "on-primary-fixed-variant": "#004f54",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed": "#301400",
+              "on-primary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "on-primary-container": "#d0fbff",
+              "inverse-surface": "#2d3132",
+              "secondary-container": "#cbe7f6",
+              "tertiary-fixed-dim": "#ffb785"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#f6fafa] dark:bg-slate-900 no-border bg-[#f1f4f4] dark:bg-slate-800">
+<div class="flex items-center justify-between px-8 py-4 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#006067] dark:text-[#007b83] cursor-pointer">menu</span>
+<h1 class="text-2xl font-bold tracking-tighter text-[#006067] dark:text-[#007b83]">ZahnPrep</h1>
+</div>
+<!-- Search Bar Integration -->
+<div class="hidden md:flex flex-1 max-w-xl mx-12">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-2.5 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/20 text-sm" placeholder="Search your library..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex gap-8">
+<a class="text-[#006067] dark:text-[#007b83] font-semibold text-sm" href="#">Library</a>
+<a class="text-[#4a4e4e] dark:text-slate-400 font-medium text-sm hover:text-primary transition-colors" href="#">Revision Sheets</a>
+<a class="text-[#4a4e4e] dark:text-slate-400 font-medium text-sm hover:text-primary transition-colors" href="#">Categories</a>
+</nav>
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold overflow-hidden border-2 border-surface-container-highest">
+<img alt="User Profile" data-alt="professional portrait of a young academic with glasses in a minimalist vector style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB9yOj6Ehq9RboT8IDEIqt5XWRoqLYS5YDQSSL9uqq2RrvNoDpr_YXzrQ8lnW-ZfZLylEgDAbMEn38TaLb4bssHPZVBGhH_wJ2MnZ3mBUGSH41nn_N0nh2KyCEc7n5hJvhKiHG703d3czI2LsG9P_9QPZgbJQrmA9IB2gpfFRVwNK2zSzZNy9cyd5iQ5uqyGx3t609le5qy75M7YlQtygwAXcRM4_6pI-6s_kEl74WE2AEyuHeDDzYgRlvJ3LZRWB2USL7pSX7uNMY"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Sidebar (NavigationDrawer) -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 bg-[#f1f4f4] dark:bg-slate-900 rounded-r-xl shadow-sm dark:shadow-none hidden lg:flex flex-col pt-24">
+<div class="px-6 mb-8">
+<h2 class="text-lg font-bold text-[#006067]">Study Workspace</h2>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="bg-[#ffffff] dark:bg-[#006067] text-[#006067] dark:text-white rounded-lg mx-2 flex items-center gap-4 px-4 py-3 ease-in-out duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="import_contacts">import_contacts</span>
+<span class="text-sm font-medium">Library</span>
+</a>
+<a class="text-[#4a4e4e] dark:text-slate-400 px-4 py-3 mx-2 flex items-center gap-4 hover:bg-white/50 dark:hover:bg-slate-800 rounded-lg ease-in-out duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="Description">description</span>
+<span class="text-sm font-medium">Revision Sheets</span>
+</a>
+<a class="text-[#4a4e4e] dark:text-slate-400 px-4 py-3 mx-2 flex items-center gap-4 hover:bg-white/50 dark:hover:bg-slate-800 rounded-lg ease-in-out duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span class="text-sm font-medium">PDF Vault</span>
+</a>
+<a class="text-[#4a4e4e] dark:text-slate-400 px-4 py-3 mx-2 flex items-center gap-4 hover:bg-white/50 dark:hover:bg-slate-800 rounded-lg ease-in-out duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="text-sm font-medium">Exam Categories</span>
+</a>
+<div class="pt-4 mt-4 border-t border-outline-variant/10">
+<a class="text-[#4a4e4e] dark:text-slate-400 px-4 py-3 mx-2 flex items-center gap-4 hover:bg-white/50 dark:hover:bg-slate-800 rounded-lg ease-in-out duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</div>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="lg:pl-64 pt-24 pb-32 min-h-screen">
+<div class="max-w-7xl mx-auto px-8">
+<!-- Page Header -->
+<div class="flex items-end justify-between mb-12">
+<div class="max-w-2xl">
+<span class="text-[0.6875rem] uppercase tracking-widest font-bold text-tertiary mb-2 block">Knowledge Base</span>
+<h2 class="text-4xl font-bold tracking-tight text-on-surface">Your Academic Library</h2>
+<p class="text-on-surface-variant mt-4 text-lg leading-relaxed">Organize, review, and master your study materials with AI-enhanced precision.</p>
+</div>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary px-6 py-3 rounded-xl font-medium shadow-md flex items-center gap-2 hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-sm">add</span>
+                    Upload Material
+                </button>
+</div>
+<!-- Recent Materials Section -->
+<section class="mb-16">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold text-on-surface">Recent Materials</h3>
+<button class="text-primary text-sm font-semibold hover:underline">View History</button>
+</div>
+<div class="flex gap-6 overflow-x-auto pb-4 hide-scrollbar -mx-2 px-2">
+<!-- Recent Card 1 -->
+<div class="flex-shrink-0 w-80 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10 shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 rounded-lg bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">description</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter bg-surface-container-high px-2 py-1 rounded">Sheet</span>
+</div>
+<h4 class="font-bold text-lg mb-1 group-hover:text-primary transition-colors">Constitutional Framework</h4>
+<p class="text-sm text-on-surface-variant mb-6">Modified 2 hours ago</p>
+<button class="w-full py-2.5 bg-surface-container-low text-primary rounded-lg text-sm font-bold flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white transition-all">
+                            Jump back to practice
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Recent Card 2 -->
+<div class="flex-shrink-0 w-80 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10 shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 rounded-lg bg-tertiary/5 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter bg-surface-container-high px-2 py-1 rounded text-tertiary">PDF</span>
+</div>
+<h4 class="font-bold text-lg mb-1 group-hover:text-primary transition-colors">Medieval Indian History</h4>
+<p class="text-sm text-on-surface-variant mb-6">Modified 5 hours ago</p>
+<button class="w-full py-2.5 bg-surface-container-low text-primary rounded-lg text-sm font-bold flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white transition-all">
+                            Jump back to practice
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<!-- Recent Card 3 -->
+<div class="flex-shrink-0 w-80 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/10 shadow-sm hover:shadow-md transition-shadow group">
+<div class="flex justify-between items-start mb-6">
+<div class="w-12 h-12 rounded-lg bg-secondary/5 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">edit_note</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter bg-surface-container-high px-2 py-1 rounded">Note</span>
+</div>
+<h4 class="font-bold text-lg mb-1 group-hover:text-primary transition-colors">Economic Survey 2024</h4>
+<p class="text-sm text-on-surface-variant mb-6">Modified Yesterday</p>
+<button class="w-full py-2.5 bg-surface-container-low text-primary rounded-lg text-sm font-bold flex items-center justify-center gap-2 group-hover:bg-primary group-hover:text-white transition-all">
+                            Jump back to practice
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Categorized Library List -->
+<section class="mb-16">
+<div class="space-y-12">
+<!-- Category: UPSC -->
+<div class="bg-surface-container-low rounded-2xl p-8">
+<div class="flex items-center gap-3 mb-8">
+<span class="w-2 h-8 bg-primary rounded-full"></span>
+<h3 class="text-2xl font-bold">UPSC CSE</h3>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<!-- List Item 1 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-xl hover:translate-x-1 transition-transform cursor-pointer border-l-4 border-transparent hover:border-primary">
+<div class="flex items-center gap-6">
+<div class="w-10 h-10 flex items-center justify-center bg-primary/10 text-primary rounded-lg">
+<span class="material-symbols-outlined">description</span>
+</div>
+<div>
+<h5 class="font-bold text-on-surface">Modern Indian History: Comprehensive Guide</h5>
+<div class="flex gap-4 mt-1">
+<span class="text-[10px] uppercase font-bold text-on-surface-variant">Sheet</span>
+<span class="text-[10px] uppercase font-bold text-outline">Oct 12, 2023</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="px-3 py-1 bg-surface-container-high text-[10px] font-bold rounded-full">High Priority</span>
+<span class="material-symbols-outlined text-outline hover:text-primary">more_vert</span>
+</div>
+</div>
+<!-- List Item 2 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-xl hover:translate-x-1 transition-transform cursor-pointer border-l-4 border-transparent hover:border-primary">
+<div class="flex items-center gap-6">
+<div class="w-10 h-10 flex items-center justify-center bg-tertiary/10 text-tertiary rounded-lg">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div>
+<h5 class="font-bold text-on-surface">International Relations: Bilateral Summits</h5>
+<div class="flex gap-4 mt-1">
+<span class="text-[10px] uppercase font-bold text-on-surface-variant">PDF</span>
+<span class="text-[10px] uppercase font-bold text-outline">Oct 10, 2023</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline hover:text-primary">more_vert</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Category: SSC CGL -->
+<div class="bg-surface-container-low rounded-2xl p-8">
+<div class="flex items-center gap-3 mb-8">
+<span class="w-2 h-8 bg-tertiary rounded-full"></span>
+<h3 class="text-2xl font-bold">SSC CGL</h3>
+</div>
+<div class="grid grid-cols-1 gap-4">
+<div class="flex items-center justify-between p-5 bg-surface-container-lowest rounded-xl hover:translate-x-1 transition-transform cursor-pointer border-l-4 border-transparent hover:border-tertiary">
+<div class="flex items-center gap-6">
+<div class="w-10 h-10 flex items-center justify-center bg-secondary/10 text-secondary rounded-lg">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+<div>
+<h5 class="font-bold text-on-surface">Quantitative Aptitude: Shortcuts &amp; Formulae</h5>
+<div class="flex gap-4 mt-1">
+<span class="text-[10px] uppercase font-bold text-on-surface-variant">Note</span>
+<span class="text-[10px] uppercase font-bold text-outline">Oct 05, 2023</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-outline hover:text-tertiary">more_vert</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Category: JKPSC (Empty State Example) -->
+<div class="bg-surface-container-low rounded-2xl p-8">
+<div class="flex items-center gap-3 mb-8">
+<span class="w-2 h-8 bg-outline rounded-full"></span>
+<h3 class="text-2xl font-bold">JKPSC</h3>
+</div>
+<div class="border-2 border-dashed border-outline-variant rounded-xl p-12 flex flex-col items-center text-center">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center mb-4">
+<span class="material-symbols-outlined text-outline text-3xl">folder_off</span>
+</div>
+<h4 class="text-lg font-bold text-on-surface">No files here yet</h4>
+<p class="text-on-surface-variant text-sm mt-2 max-w-xs">Start building your JKPSC library by uploading previous year papers or class notes.</p>
+<button class="mt-6 text-primary text-sm font-bold flex items-center gap-2 hover:underline">
+<span class="material-symbols-outlined text-sm">upload_file</span>
+                                Add first document
+                            </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-16 px-4 bg-[#f6fafa]/80 dark:bg-slate-900/80 backdrop-blur-md z-50 border-t border-[#bdc9ca]/20 shadow-lg dark:shadow-none">
+<a class="flex flex-col items-center justify-center text-[#4a4e4e] dark:text-slate-500 opacity-60 transition-transform duration-300 ease-out hover:opacity-100" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#4a4e4e] dark:text-slate-500 opacity-60 transition-transform duration-300 ease-out hover:opacity-100" href="#">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Search</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#006067] dark:text-[#007b83] scale-110 transition-transform duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="history" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Recent</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#4a4e4e] dark:text-slate-500 opacity-60 transition-transform duration-300 ease-out hover:opacity-100" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-[10px] uppercase tracking-widest font-bold">Profile</span>
+</a>
+</nav>
+<!-- Floating Action Button (Library Specific: Search/Add) -->
+<button class="fixed bottom-24 right-8 lg:right-12 w-14 h-14 bg-primary text-on-primary rounded-full shadow-2xl flex items-center justify-center group active:scale-95 transition-all">
+<span class="material-symbols-outlined text-2xl group-hover:rotate-90 transition-transform duration-300">add</span>
+</button>
+</body></html>

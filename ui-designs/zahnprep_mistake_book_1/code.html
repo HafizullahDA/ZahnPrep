@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ZahnPrep - Your Mistake Book</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline": "#6e797a",
+              "outline-variant": "#bdc9ca",
+              "on-background": "#181c1d",
+              "on-surface": "#181c1d",
+              "surface-container-low": "#f1f4f4",
+              "background": "#f6fafa",
+              "on-primary": "#ffffff",
+              "surface-container-lowest": "#ffffff",
+              "secondary-fixed": "#cbe7f6",
+              "on-secondary-fixed": "#011e29",
+              "error-container": "#ffdad6",
+              "surface-container": "#ebeeef",
+              "on-tertiary-fixed-variant": "#6f3808",
+              "surface-bright": "#f6fafa",
+              "tertiary-container": "#a05f2e",
+              "on-primary-fixed-variant": "#004f54",
+              "primary": "#006067",
+              "surface-tint": "#006970",
+              "secondary-fixed-dim": "#afcbd9",
+              "on-secondary-fixed-variant": "#304a56",
+              "tertiary-fixed": "#ffdcc6",
+              "on-surface-variant": "#3e494a",
+              "surface": "#f6fafa",
+              "secondary": "#48626f",
+              "on-tertiary-fixed": "#301400",
+              "on-secondary-container": "#4e6875",
+              "surface-variant": "#dfe3e3",
+              "surface-container-high": "#e5e9e9",
+              "inverse-surface": "#2d3132",
+              "error": "#ba1a1a",
+              "secondary-container": "#cbe7f6",
+              "on-primary-fixed": "#002022",
+              "on-error": "#ffffff",
+              "tertiary": "#834718",
+              "on-primary-container": "#d0fbff",
+              "primary-fixed": "#96f1fa",
+              "on-tertiary-container": "#fff1e9",
+              "surface-dim": "#d7dbdb",
+              "surface-container-highest": "#dfe3e3",
+              "tertiary-fixed-dim": "#ffb785",
+              "on-secondary": "#ffffff",
+              "inverse-on-surface": "#eef1f1",
+              "inverse-primary": "#7ad5dd",
+              "primary-container": "#007b83",
+              "primary-fixed-dim": "#7ad5dd",
+              "on-tertiary": "#ffffff",
+              "on-error-container": "#93000a"
+            },
+            fontFamily: {
+              "headline": ["Inter"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body antialiased">
+<!-- TopAppBar -->
+<header class="flex items-center justify-between w-full px-5 py-3 sticky top-0 z-50 bg-[#f6fafa] dark:bg-slate-900 font-inter antialiased tracking-tight text-[#181c1d] dark:text-slate-100">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-[#006067] dark:text-[#007b83]">menu</span>
+<h1 class="text-lg font-bold text-[#006067] dark:text-[#007b83]">Your Mistake Book</h1>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-high px-3 py-1.5 rounded-full transition-transform active:scale-95">
+<span class="text-sm font-semibold text-primary">12 Day Streak 🔥</span>
+</div>
+</header>
+<main class="max-w-5xl mx-auto px-5 pt-8 pb-32">
+<!-- Section 1: Urgent - Due Today -->
+<section class="mb-12">
+<div class="flex items-center justify-between mb-5">
+<h2 class="text-[1.75rem] font-bold tracking-tight text-on-surface">Urgent - Due Today</h2>
+<span class="text-xs font-bold tracking-widest uppercase text-tertiary opacity-80">3 SESSIONS PENDING</span>
+</div>
+<div class="flex gap-5 overflow-x-auto pb-4 hide-scrollbar -mx-5 px-5 snap-x">
+<!-- Card 1 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-start bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/20 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-4">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/5 rounded-lg">balance</span>
+<span class="text-[10px] font-bold tracking-widest uppercase text-on-surface-variant px-2 py-1 bg-surface-container rounded">POLITY</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-1">Fundamental Rights</h3>
+<p class="text-on-surface-variant text-sm mb-6">5 Questions Due</p>
+</div>
+<button class="w-full py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-xl text-sm transition-transform active:scale-[0.98]">
+                        Review Now
+                    </button>
+</div>
+<!-- Card 2 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-start bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/20 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-4">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/5 rounded-lg">history_edu</span>
+<span class="text-[10px] font-bold tracking-widest uppercase text-on-surface-variant px-2 py-1 bg-surface-container rounded">HISTORY</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-1">Mughal Empire</h3>
+<p class="text-on-surface-variant text-sm mb-6">8 Questions Due</p>
+</div>
+<button class="w-full py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-xl text-sm transition-transform active:scale-[0.98]">
+                        Review Now
+                    </button>
+</div>
+<!-- Card 3 -->
+<div class="min-w-[280px] md:min-w-[320px] snap-start bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/20 shadow-sm flex flex-col justify-between">
+<div>
+<div class="flex items-start justify-between mb-4">
+<span class="material-symbols-outlined text-primary p-2 bg-primary/5 rounded-lg">trending_up</span>
+<span class="text-[10px] font-bold tracking-widest uppercase text-on-surface-variant px-2 py-1 bg-surface-container rounded">ECONOMY</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-1">Inflation</h3>
+<p class="text-on-surface-variant text-sm mb-6">12 Questions Due</p>
+</div>
+<button class="w-full py-3 bg-gradient-to-br from-primary to-primary-container text-on-primary font-bold rounded-xl text-sm transition-transform active:scale-[0.98]">
+                        Review Now
+                    </button>
+</div>
+</div>
+</section>
+<!-- Section 2: Diagnosed Weak Zones -->
+<section>
+<div class="flex items-center gap-3 mb-8">
+<h2 class="text-[1.75rem] font-bold tracking-tight text-on-surface">Diagnosed Weak Zones</h2>
+<div class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase tracking-wider">AI Analysis</div>
+</div>
+<div class="space-y-4">
+<!-- Item 1 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-low rounded-xl group hover:bg-surface-container transition-colors duration-200">
+<div class="flex items-center gap-5">
+<div class="relative w-12 h-12 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-outline-variant/30" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-tertiary" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="71.6" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-[11px] font-bold text-on-surface">43%</span>
+</div>
+<div>
+<h4 class="text-base font-semibold text-on-surface">Monetary Policy</h4>
+<p class="text-xs text-on-surface-variant">Last attempted 2 days ago</p>
+</div>
+</div>
+<button class="bg-surface-container-lowest text-primary px-4 py-2 rounded-lg text-sm font-bold border border-outline-variant/20 hover:bg-primary hover:text-white transition-all duration-300">
+                        Rebuild Weakness
+                    </button>
+</div>
+<!-- Item 2 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-low rounded-xl group hover:bg-surface-container transition-colors duration-200">
+<div class="flex items-center gap-5">
+<div class="relative w-12 h-12 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-outline-variant/30" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-tertiary" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="77.8" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-[11px] font-bold text-on-surface">38%</span>
+</div>
+<div>
+<h4 class="text-base font-semibold text-on-surface">Gupta Empire Art</h4>
+<p class="text-xs text-on-surface-variant">Consistent errors in Architecture</p>
+</div>
+</div>
+<button class="bg-surface-container-lowest text-primary px-4 py-2 rounded-lg text-sm font-bold border border-outline-variant/20 hover:bg-primary hover:text-white transition-all duration-300">
+                        Rebuild Weakness
+                    </button>
+</div>
+<!-- Item 3 -->
+<div class="flex items-center justify-between p-5 bg-surface-container-low rounded-xl group hover:bg-surface-container transition-colors duration-200">
+<div class="flex items-center gap-5">
+<div class="relative w-12 h-12 flex items-center justify-center">
+<svg class="w-full h-full transform -rotate-90">
+<circle class="text-outline-variant/30" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-width="4"></circle>
+<circle class="text-tertiary" cx="24" cy="24" fill="transparent" r="20" stroke="currentColor" stroke-dasharray="125.6" stroke-dashoffset="60.3" stroke-width="4"></circle>
+</svg>
+<span class="absolute text-[11px] font-bold text-on-surface">52%</span>
+</div>
+<div>
+<h4 class="text-base font-semibold text-on-surface">Syllogism</h4>
+<p class="text-xs text-on-surface-variant">Logic structure needs practice</p>
+</div>
+</div>
+<button class="bg-surface-container-lowest text-primary px-4 py-2 rounded-lg text-sm font-bold border border-outline-variant/20 hover:bg-primary hover:text-white transition-all duration-300">
+                        Rebuild Weakness
+                    </button>
+</div>
+</div>
+</section>
+<!-- Aesthetic Empty/Transition Space -->
+<div class="h-24"></div>
+<!-- Featured Resource / Editorial Block -->
+<div class="relative w-full h-64 rounded-2xl overflow-hidden bg-primary-container p-8 flex flex-col justify-end">
+<div class="absolute inset-0 opacity-20">
+<img alt="" class="w-full h-full object-cover" data-alt="Overhead view of a minimalist study desk with an open book and pen in soft natural daylight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCA-u7Y69vwreC4iYDD_7xlkLWUfpKSFZ3hwAS6ECD2JxMBhVtiQH50S0-GiP6mpGyc7TCvmvQ83FiKQBb1hezpeICOkouCE50GgiBpqvxLsqKFTB1rO4H2U4YvF-2o939z3wXNekYAq2reS7UVs8KIZiU19sC7T2_eS6jsUmxH1E-WuVnt6ueSiZutlht7XD1tMF9LBTctez88qK3GJAWVaMKxWZ4Uwd3OoIU87MToVp2Ync65FhPozZhhXOul0XjG-_mSYVT16Sg"/>
+</div>
+<div class="relative z-10 max-w-lg">
+<span class="text-[10px] font-extrabold tracking-[0.2em] text-on-primary-container uppercase mb-2 block">ZAHNPREP INSIGHTS</span>
+<h3 class="text-3xl font-bold text-white mb-2 leading-tight">Mastering Memory Anchors</h3>
+<p class="text-on-primary-container text-sm font-medium leading-relaxed opacity-90">How to turn your mistakes into permanent knowledge using neurological spacing techniques.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-[#f6fafa]/80 dark:bg-slate-900/80 backdrop-blur-md z-50 border-t border-[#bdc9ca]/20 shadow-none">
+<a class="flex flex-col items-center justify-center text-[#566061] dark:text-slate-400 px-4 py-1.5 hover:text-[#006067] dark:hover:text-[#007b83] transition-all duration-300 tap-highlight-transparent" href="#">
+<span class="material-symbols-outlined mb-1">home</span>
+<span class="text-[11px] font-medium uppercase tracking-wider font-inter">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#566061] dark:text-slate-400 px-4 py-1.5 hover:text-[#006067] dark:hover:text-[#007b83] transition-all duration-300 tap-highlight-transparent" href="#">
+<span class="material-symbols-outlined mb-1" data-weight="fill">psychology</span>
+<span class="text-[11px] font-medium uppercase tracking-wider font-inter">AI Quiz</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#006067] text-white rounded-xl px-4 py-1.5 transition-all duration-300 tap-highlight-transparent" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">menu_book</span>
+<span class="text-[11px] font-medium uppercase tracking-wider font-inter">Mistake Book</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#566061] dark:text-slate-400 px-4 py-1.5 hover:text-[#006067] dark:hover:text-[#007b83] transition-all duration-300 tap-highlight-transparent" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="text-[11px] font-medium uppercase tracking-wider font-inter">Profile</span>
+</a>
+</nav>
+</body></html>
