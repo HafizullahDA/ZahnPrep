@@ -6,115 +6,283 @@ import { Button } from '@/components/ui/Button';
 
 export const dynamic = 'force-dynamic';
 
+const reviewQueue = [
+  {
+    subject: 'Polity',
+    topic: 'Fundamental Rights',
+    source: 'Generated from Constitutional Framework notes',
+    dueCount: 5,
+    icon: 'balance',
+  },
+  {
+    subject: 'History',
+    topic: 'Mughal Administration',
+    source: 'Generated from Medieval India PDF',
+    dueCount: 8,
+    icon: 'history_edu',
+  },
+  {
+    subject: 'Economy',
+    topic: 'Monetary Policy',
+    source: 'Generated from Economic Survey summary',
+    dueCount: 4,
+    icon: 'monitoring',
+  },
+];
+
+const weakZones = [
+  {
+    title: 'Monetary Policy',
+    mastery: '43%',
+    note: 'Concept traps from your note-derived economy MCQs still need reinforcement.',
+    offset: '71.6',
+    nextStep: 'Regenerate a 5-question drill from the same source.',
+  },
+  {
+    title: 'Syllogism',
+    mastery: '52%',
+    note: 'Recent reasoning sets show repeated option-elimination mistakes under time pressure.',
+    offset: '60.3',
+    nextStep: 'Use rapid-fire mode after one focused review round.',
+  },
+  {
+    title: 'Parliamentary Committees',
+    mastery: '61%',
+    note: 'Recall is improving, but your generated sets still expose detail-level gaps.',
+    offset: '49.0',
+    nextStep: 'Run one more note-based set and compare retention.',
+  },
+];
+
+const loopSteps = [
+  'Generate questions from your own notes',
+  'Spot the concepts you keep missing',
+  'Feed those weak zones into your next revision cycle',
+];
+
 export default function MistakeBookPage() {
   return (
-    <>
-      <header className="flex items-center justify-between w-full px-5 py-4 sticky top-0 z-50 bg-background/90 backdrop-blur-md">
-        <div className="flex items-center gap-4">
-          <span className="material-symbols-outlined text-primary">menu</span>
-          <Typography variant="headline" as="h1" className="text-xl">Your Mistake Book</Typography>
-        </div>
-        <div className="flex items-center gap-2 bg-surface-container-high px-3 py-1.5 rounded-full">
-          <Typography variant="body" className="text-sm font-semibold text-primary">12 Day Streak</Typography>
+    <div className="min-h-screen bg-surface text-on-surface">
+      <header className="sticky top-0 z-50 bg-surface/90 backdrop-blur-md">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+          <div className="flex items-center gap-3">
+            <span className="material-symbols-outlined text-3xl text-primary">school</span>
+            <Typography variant="title" as="h1" className="text-lg font-bold tracking-tight text-primary">
+              ZahnPrep
+            </Typography>
+          </div>
+
+          <div className="hidden items-center gap-8 md:flex">
+            <Link href="/dashboard" className="text-on-surface-variant text-sm transition-colors hover:text-primary">
+              Generate
+            </Link>
+            <Link href="/library" className="text-on-surface-variant text-sm transition-colors hover:text-primary">
+              Library
+            </Link>
+            <Link href="/mistakes" className="text-sm font-semibold text-primary">
+              Mistakes
+            </Link>
+            <Link href="/simulator" className="text-on-surface-variant text-sm transition-colors hover:text-primary">
+              Practice Modes
+            </Link>
+          </div>
+
+          <Link href="/dashboard">
+            <Button variant="ghost" className="font-semibold text-secondary">
+              Back to Dashboard
+            </Button>
+          </Link>
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-5 pt-8 pb-32">
-        <section className="mb-12">
-          <div className="flex items-center justify-between mb-5">
-            <Typography variant="headline">Urgent - Due Today</Typography>
-            <Typography variant="label" className="opacity-80">3 SESSIONS PENDING</Typography>
+      <main className="mx-auto max-w-7xl px-6 pb-24 pt-10">
+        <section className="mb-16 grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+          <div className="max-w-3xl">
+            <Typography variant="label" className="mb-4 block text-primary">
+              Mistake Review Loop
+            </Typography>
+            <Typography variant="display" as="h2" className="mb-6 text-5xl lg:text-7xl">
+              Turn misses from your note-based MCQs into your smartest next study move.
+            </Typography>
+            <Typography variant="body" className="max-w-2xl text-lg leading-relaxed text-on-surface-variant">
+              This page closes the ZahnPrep loop. After you generate practice from your own material, your weak topics surface here so revision stays tied to the exact notes that created the questions.
+            </Typography>
           </div>
 
-          <div className="flex gap-5 overflow-x-auto pb-4 -mx-5 px-5 snap-x hide-scrollbar">
-            <Surface level="lowest" className="min-w-[280px] md:min-w-[320px] snap-start p-6 rounded-xl border border-outline-variant/20 shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="flex items-start justify-between mb-4">
-                  <span className="material-symbols-outlined text-primary p-2 bg-primary/5 rounded-lg">balance</span>
-                  <Typography variant="label" className="px-2 py-1 bg-surface-container rounded">POLITY</Typography>
+          <Surface level="low" className="rounded-[2rem] p-8">
+            <Typography variant="label" className="mb-3 block text-primary">
+              How Mistake Review Works
+            </Typography>
+            <div className="space-y-4">
+              {loopSteps.map((step, index) => (
+                <div key={step} className="rounded-2xl bg-surface-container-lowest p-4">
+                  <Typography variant="label" className="mb-1 block text-outline">
+                    Step {index + 1}
+                  </Typography>
+                  <Typography variant="body" className="font-semibold text-on-surface">
+                    {step}
+                  </Typography>
                 </div>
-                <Typography variant="title" as="h3" className="mb-1">Fundamental Rights</Typography>
-                <Typography variant="body" className="text-sm mb-6">5 Questions Due</Typography>
+              ))}
+            </div>
+          </Surface>
+        </section>
+
+        <section className="mb-16 grid gap-8 xl:grid-cols-[1.15fr_0.85fr]">
+          <Surface level="low" className="rounded-[2rem] p-6 md:p-8">
+            <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-2xl">
+                <Typography variant="headline" as="h3" className="mb-2 text-3xl font-bold tracking-tight">
+                  Review queue from recent practice
+                </Typography>
+                <Typography variant="body" className="text-on-surface-variant">
+                  These question clusters came from your earlier note-to-MCQ sessions and are due for another pass now.
+                </Typography>
               </div>
-              <Button variant="primary" className="w-full text-sm">Review Now</Button>
+              <div className="rounded-full bg-surface-container-high px-4 py-2 text-sm font-semibold text-primary">
+                17 questions due now
+              </div>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              {reviewQueue.map((item) => (
+                <Surface key={item.topic} level="lowest" className="rounded-[1.75rem] p-6 shadow-sm">
+                  <div className="mb-6 flex items-start justify-between gap-4">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+                      <span className="material-symbols-outlined">{item.icon}</span>
+                    </div>
+                    <span className="rounded-full bg-surface-container-high px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-on-surface-variant">
+                      {item.subject}
+                    </span>
+                  </div>
+                  <Typography variant="title" as="h4" className="mb-2 text-xl font-bold tracking-tight">
+                    {item.topic}
+                  </Typography>
+                  <Typography variant="body" className="mb-3 text-sm text-on-surface-variant">
+                    {item.source}
+                  </Typography>
+                  <Typography variant="label" className="mb-6 block text-tertiary">
+                    {item.dueCount} questions waiting for review
+                  </Typography>
+                  <Button variant="primary" className="w-full text-sm">
+                    Review This Set
+                  </Button>
+                </Surface>
+              ))}
+            </div>
+          </Surface>
+
+          <div className="space-y-6">
+            <Surface level="lowest" className="rounded-[2rem] p-8 shadow-sm">
+              <Typography variant="label" className="mb-3 block text-primary">
+                What This Improves
+              </Typography>
+              <Typography variant="title" as="h3" className="mb-3 text-2xl font-bold tracking-tight">
+                Revision stays connected to your original source material.
+              </Typography>
+              <Typography variant="body" className="leading-relaxed text-on-surface-variant">
+                Instead of just seeing wrong answers, you get a clearer picture of which topics from your notes still need another explanation, another MCQ round, or a timed drill.
+              </Typography>
             </Surface>
 
-            <Surface level="lowest" className="min-w-[280px] md:min-w-[320px] snap-start p-6 rounded-xl border border-outline-variant/20 shadow-sm flex flex-col justify-between">
-              <div>
-                <div className="flex items-start justify-between mb-4">
-                  <span className="material-symbols-outlined text-primary p-2 bg-primary/5 rounded-lg">history_edu</span>
-                  <Typography variant="label" className="px-2 py-1 bg-surface-container rounded">HISTORY</Typography>
-                </div>
-                <Typography variant="title" as="h3" className="mb-1">Mughal Empire</Typography>
-                <Typography variant="body" className="text-sm mb-6">8 Questions Due</Typography>
-              </div>
-              <Button variant="primary" className="w-full text-sm">Review Now</Button>
+            <Surface level="low" className="rounded-[2rem] p-8">
+              <Typography variant="label" className="mb-3 block text-primary">
+                Next Action
+              </Typography>
+              <Typography variant="title" as="h3" className="mb-3 text-2xl font-bold tracking-tight">
+                Regenerate from the same notes after you review.
+              </Typography>
+              <Typography variant="body" className="mb-6 leading-relaxed text-on-surface-variant">
+                Go back to the dashboard, reuse the same source material, and check whether your weak zones improve in the next practice set.
+              </Typography>
+              <Link href="/dashboard">
+                <Button variant="primary" className="w-full">
+                  Return to Generation Dashboard
+                </Button>
+              </Link>
             </Surface>
           </div>
         </section>
 
-        <section>
-          <div className="flex items-center gap-3 mb-8">
-            <Typography variant="headline">Diagnosed Weak Zones</Typography>
-            <div className="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase tracking-wider">AI Analysis</div>
-          </div>
-
-          <div className="space-y-4">
-            <Surface level="low" className="flex items-center justify-between p-5 rounded-xl group hover:bg-surface-container transition-colors duration-200">
-              <div className="flex items-center gap-5">
-                <div className="relative w-12 h-12 flex items-center justify-center">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <circle className="text-outline-variant/30" cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="4" fill="transparent" />
-                    <circle className="text-tertiary" cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="4" fill="transparent" strokeDasharray="125.6" strokeDashoffset="71.6" />
-                  </svg>
-                  <span className="absolute text-[11px] font-bold text-on-surface">43%</span>
-                </div>
-                <div>
-                  <Typography variant="title" as="h4" className="text-base">Monetary Policy</Typography>
-                  <Typography variant="body" className="text-xs">Last attempted 2 days ago</Typography>
-                </div>
+        <section className="grid gap-8 xl:grid-cols-[1.15fr_0.85fr]">
+          <Surface level="low" className="rounded-[2rem] p-8">
+            <div className="mb-8 flex items-center gap-3">
+              <Typography variant="headline" as="h3" className="text-3xl font-bold tracking-tight">
+                Weak zones diagnosed from your generated sets
+              </Typography>
+              <div className="rounded-full bg-primary/10 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-primary">
+                Pattern View
               </div>
-              <Button variant="tertiary" className="text-xs md:text-sm">Rebuild Weakness</Button>
-            </Surface>
+            </div>
 
-            <Surface level="low" className="flex items-center justify-between p-5 rounded-xl group hover:bg-surface-container transition-colors duration-200">
-              <div className="flex items-center gap-5">
-                <div className="relative w-12 h-12 flex items-center justify-center">
-                  <svg className="w-full h-full transform -rotate-90">
-                    <circle className="text-outline-variant/30" cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="4" fill="transparent" />
-                    <circle className="text-tertiary" cx="24" cy="24" r="20" stroke="currentColor" strokeWidth="4" fill="transparent" strokeDasharray="125.6" strokeDashoffset="60.3" />
-                  </svg>
-                  <span className="absolute text-[11px] font-bold text-on-surface">52%</span>
-                </div>
-                <div>
-                  <Typography variant="title" as="h4" className="text-base">Syllogism</Typography>
-                  <Typography variant="body" className="text-xs">Logic structure needs practice</Typography>
-                </div>
-              </div>
-              <Button variant="tertiary" className="text-xs md:text-sm">Rebuild Weakness</Button>
-            </Surface>
-          </div>
+            <div className="space-y-4">
+              {weakZones.map((zone) => (
+                <Surface key={zone.title} level="lowest" className="rounded-[1.5rem] p-5">
+                  <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+                    <div className="flex items-center gap-5">
+                      <div className="relative flex h-12 w-12 items-center justify-center">
+                        <svg className="h-full w-full -rotate-90 transform">
+                          <circle cx="24" cy="24" r="20" fill="transparent" stroke="currentColor" strokeWidth="4" className="text-outline-variant/30" />
+                          <circle
+                            cx="24"
+                            cy="24"
+                            r="20"
+                            fill="transparent"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                            strokeDasharray="125.6"
+                            strokeDashoffset={zone.offset}
+                            className="text-tertiary"
+                          />
+                        </svg>
+                        <span className="absolute text-[11px] font-bold text-on-surface">{zone.mastery}</span>
+                      </div>
+                      <div>
+                        <Typography variant="title" as="h4" className="mb-1 text-lg font-bold tracking-tight">
+                          {zone.title}
+                        </Typography>
+                        <Typography variant="body" className="mb-2 text-sm text-on-surface-variant">
+                          {zone.note}
+                        </Typography>
+                        <Typography variant="label" className="block text-outline">
+                          {zone.nextStep}
+                        </Typography>
+                      </div>
+                    </div>
+                    <Button variant="secondary" className="text-sm">
+                      Rebuild Weakness
+                    </Button>
+                  </div>
+                </Surface>
+              ))}
+            </div>
+          </Surface>
+
+          <Surface level="low" className="rounded-[2rem] p-8">
+            <Typography variant="label" className="mb-3 block text-primary">
+              Quick Links
+            </Typography>
+            <div className="space-y-4">
+              <Link href="/library" className="block rounded-2xl bg-surface-container-lowest p-4 transition hover:bg-surface-container-high">
+                <Typography variant="title" as="div" className="mb-1 text-lg font-bold">
+                  Open Source Library
+                </Typography>
+                <Typography variant="body" className="text-sm text-on-surface-variant">
+                  Return to the notes and PDFs that produced these weak zones.
+                </Typography>
+              </Link>
+              <Link href="/simulator" className="block rounded-2xl bg-surface-container-lowest p-4 transition hover:bg-surface-container-high">
+                <Typography variant="title" as="div" className="mb-1 text-lg font-bold">
+                  Practice Modes
+                </Typography>
+                <Typography variant="body" className="text-sm text-on-surface-variant">
+                  Move into rapid-fire or exam pressure mode once your weak areas are clearer.
+                </Typography>
+              </Link>
+            </div>
+          </Surface>
         </section>
       </main>
-
-      <nav className="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3 bg-background/80 backdrop-blur-md z-50 border-t border-outline-variant/20 shadow-none">
-        <Link className="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300" href="/">
-          <span className="material-symbols-outlined mb-1">home</span>
-          <span className="text-[11px] font-medium uppercase tracking-wider font-inter">Home</span>
-        </Link>
-        <Link className="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300" href="/simulator">
-          <span className="material-symbols-outlined mb-1">psychology</span>
-          <span className="text-[11px] font-medium uppercase tracking-wider font-inter">AI Quiz</span>
-        </Link>
-        <Link className="flex flex-col items-center justify-center bg-primary text-white rounded-xl px-4 py-1.5 transition-all duration-300 shadow-md" href="/mistakes">
-          <span className="material-symbols-outlined mb-1">menu_book</span>
-          <span className="text-[11px] font-medium uppercase tracking-wider font-inter">Mistake Book</span>
-        </Link>
-        <Link className="flex flex-col items-center justify-center text-on-surface-variant hover:text-primary transition-all duration-300" href="/library">
-          <span className="material-symbols-outlined mb-1">person</span>
-          <span className="text-[11px] font-medium uppercase tracking-wider font-inter">Profile</span>
-        </Link>
-      </nav>
-    </>
+    </div>
   );
 }

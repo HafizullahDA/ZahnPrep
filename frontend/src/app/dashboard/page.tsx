@@ -314,6 +314,13 @@ export default function DashboardPage() {
                     </Typography>
                   </button>
 
+                  <div className="flex items-center gap-2 text-on-surface-variant">
+                    <span className="material-symbols-outlined text-sm text-tertiary">warning</span>
+                    <Typography variant="body" className="text-xs text-on-surface-variant">
+                      Max file size 30 MB.
+                    </Typography>
+                  </div>
+
                   <button
                     type="button"
                     onClick={() => setShowPasteArea((value) => !value)}
