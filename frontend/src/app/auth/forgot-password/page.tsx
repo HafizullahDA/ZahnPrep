@@ -1,67 +1,121 @@
 "use client";
 
-import React, { useState } from 'react';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/Button';
 import { Surface } from '@/components/ui/Surface';
 import { Typography } from '@/components/ui/Typography';
-import { Button } from '@/components/ui/Button';
+import { supabase } from '@/lib/supabase';
 
 export default function ForgotPasswordPage() {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    let isMounted = true;
+
+    const checkSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      if (isMounted && session) {
+        router.replace('/dashboard');
+      }
+    };
+
+    void checkSession();
+
+    return () => {
+      isMounted = false;
+    };
+  }, [router]);
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setLoading(true);
+    setErrorMessage('');
+
+    const redirectTo = typeof window !== 'undefined' ? `${window.location.origin}/auth/login` : undefined;
+    const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo });
+
+    if (error) {
+      setErrorMessage(error.message);
+      setLoading(false);
+      return;
+    }
+
     setSubmitted(true);
+    setLoading(false);
   };
 
   return (
-    <div className="bg-surface text-on-surface font-body min-h-[100dvh] flex flex-col">
-      <header className="w-full flex justify-center items-center px-8 py-8">
-        <Link href="/" className="flex items-center space-x-2">
-          <span className="material-symbols-outlined text-primary text-3xl">school</span>
-          <span className="text-2xl font-black text-primary tracking-tighter">ZahnPrep</span>
-        </Link>
+    <div className="min-h-[100dvh] bg-surface text-on-surface">
+      <header className="px-6 py-8">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
+          <Link href="/" className="flex items-center gap-3">
+            <span className="material-symbols-outlined text-primary text-3xl">school</span>
+            <span className="text-2xl font-black tracking-tight text-primary">ZahnPrep</span>
+          </Link>
+          <Link href="/auth/login">
+            <Button variant="ghost" className="font-semibold text-secondary">Back to Sign In</Button>
+          </Link>
+        </div>
       </header>
 
-      <main className="flex-grow flex flex-col items-center justify-center px-6 py-12">
-        <div className="w-full max-w-md">
-          <Surface level="lowest" className="p-8 md:p-11 rounded-xl shadow-sm border border-outline-variant/10">
-            <Link href="/auth/login" className="flex items-center text-primary text-sm font-bold hover:underline mb-8">
-              <span className="material-symbols-outlined text-sm mr-1">arrow_back</span>
-              Back to Login
-            </Link>
+      <main className="mx-auto grid max-w-6xl gap-10 px-6 pb-16 pt-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center">
+        <div className="max-w-2xl">
+          <Typography variant="label" className="mb-4 block text-primary">Password Recovery</Typography>
+          <Typography variant="display" as="h1" className="mb-6 text-5xl lg:text-6xl">
+            Reset access and get back to your study flow.
+          </Typography>
+          <Typography variant="body" className="mb-8 max-w-xl text-lg leading-relaxed text-on-surface-variant">
+            Enter the email attached to your account and we will send a reset link so you can return to your notes-to-MCQ workspace.
+          </Typography>
+        </div>
 
-            <div className="mb-10 text-left">
-              <Typography variant="headline" as="h1" className="text-2xl font-bold tracking-tight mb-2">Reset Password.</Typography>
-              <Typography variant="body" className="font-medium leading-relaxed">Enter your academy email to receive connection instructions.</Typography>
-            </div>
+        <div className="w-full max-w-md justify-self-center lg:justify-self-end">
+          <Surface level="lowest" className="rounded-[2rem] p-8 md:p-10 shadow-sm">
+            <Typography variant="headline" as="h2" className="mb-2 text-3xl font-bold tracking-tight">
+              Reset password.
+            </Typography>
+            <Typography variant="body" className="mb-8 leading-relaxed text-on-surface-variant">
+              We will email you a secure link to recover your account.
+            </Typography>
 
             {submitted ? (
-              <div className="p-6 bg-secondary-container text-on-secondary-container rounded-lg text-center">
-                <span className="material-symbols-outlined text-4xl mb-4 text-primary">mark_email_read</span>
-                <Typography variant="title" as="h3" className="font-bold mb-2 text-primary">Instructions Sent</Typography>
-                <Typography variant="body" className="text-sm">We've sent a secure reset link to {email}. Please check your inbox.</Typography>
+              <div className="rounded-2xl bg-surface-container-low px-4 py-4 text-sm text-on-surface">
+                Reset instructions were sent to {email}. Check your inbox and follow the secure link.
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                {errorMessage && (
+                  <div className="rounded-2xl bg-error-container px-4 py-4 text-sm text-error">
+                    {errorMessage}
+                  </div>
+                )}
+
                 <div className="space-y-2">
-                  <Typography variant="label" className="block text-[0.6875rem] font-bold tracking-widest uppercase text-on-surface-variant font-inter">Email Address</Typography>
-                  <input 
-                    type="email" 
+                  <Typography variant="label" className="block text-on-surface-variant">Email Address</Typography>
+                  <input
+                    type="email"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-4 py-3 bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all duration-200 placeholder:text-outline" 
-                    placeholder="name@university.edu" 
-                    required 
+                    onChange={(event) => setEmail(event.target.value)}
+                    className="w-full rounded-2xl bg-surface-container-low px-4 py-3 text-on-surface outline-none ring-1 ring-outline-variant/20 transition focus:bg-surface-container-lowest focus:ring-2 focus:ring-primary/20"
+                    placeholder="name@university.edu"
+                    required
                   />
                 </div>
-                <Button type="submit" variant="primary" className="w-full py-4 tracking-wide shadow-md">
-                  Send Reset Link
+
+                <Button type="submit" variant="primary" className="w-full py-4 text-base shadow-sm" disabled={loading}>
+                  {loading ? 'Sending Reset Link...' : 'Send Reset Link'}
                 </Button>
               </form>
             )}
-
           </Surface>
         </div>
       </main>
