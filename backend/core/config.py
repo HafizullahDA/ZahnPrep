@@ -31,6 +31,9 @@ class Settings(BaseSettings):
 
     MIN_MCQ_COUNT: int = 1
     MAX_MCQ_COUNT: int = 20
+    CREDITS_PER_MCQ: int = 15
+    FREE_STARTER_MCQ_COUNT: int = 30
+    FREE_STARTER_CREDITS: int = 450
     MAX_UPLOAD_SIZE_BYTES: int = 30 * 1024 * 1024
     MAX_TEXT_CONTEXT_CHARS: int = 50_000
     MAX_EXTRACTED_CONTEXT_CHARS: int = 120_000

@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = 'force-dynamic';
+
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -95,7 +97,6 @@ export default function HomePage() {
       <header className="sticky top-0 z-50 bg-surface/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-primary">school</span>
             <Typography variant="title" as="span" className="text-lg font-bold tracking-tight text-primary">
               ZahnPrep
             </Typography>

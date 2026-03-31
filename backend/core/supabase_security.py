@@ -43,6 +43,113 @@ async def verify_supabase_user(
     return user_response.user
 
 
+async def ensure_user_profile(user_id: str, email: str | None) -> dict:
+    try:
+        existing = (
+            get_supabase_client()
+            .table('profiles')
+            .select('id, email, free_mcqs_remaining')
+            .eq('id', user_id)
+            .limit(1)
+            .execute()
+        )
+
+        if existing.data:
+            return existing.data[0]
+
+        if not email:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail='User email is missing, so the profile could not be created.',
+            )
+
+        created = (
+            get_supabase_client()
+            .table('profiles')
+            .insert({'id': user_id, 'email': email})
+            .execute()
+        )
+
+        if created.data:
+            return created.data[0]
+
+        reloaded = (
+            get_supabase_client()
+            .table('profiles')
+            .select('id, email, free_mcqs_remaining')
+            .eq('id', user_id)
+            .single()
+            .execute()
+        )
+        if not reloaded.data:
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail='Profile could not be created.',
+            )
+        return reloaded.data
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail='Profile lookup failed.',
+        ) from exc
+
+
+async def get_user_profile(user_id: str) -> dict:
+    try:
+        result = (
+            get_supabase_client()
+            .table('profiles')
+            .select('id, email, free_mcqs_remaining')
+            .eq('id', user_id)
+            .single()
+            .execute()
+        )
+        if not result.data:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail='User profile not found.',
+            )
+        return result.data
+    except HTTPException:
+        raise
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail='Profile lookup failed.',
+        ) from exc
+
+
+async def get_free_mcqs_remaining(user_id: str) -> int:
+    profile = await get_user_profile(user_id)
+    return max(int(profile.get('free_mcqs_remaining') or 0), 0)
+
+
+async def consume_free_mcqs(user_id: str, amount: int) -> None:
+    if amount <= 0:
+        return
+
+    profile = await get_user_profile(user_id)
+    remaining = max(int(profile.get('free_mcqs_remaining') or 0), 0)
+
+    if remaining < amount:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail='Not enough free MCQs remaining.',
+        )
+
+    try:
+        get_supabase_client().table('profiles').update(
+            {'free_mcqs_remaining': remaining - amount}
+        ).eq('id', user_id).execute()
+    except Exception as exc:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail='Free MCQ usage update failed.',
+        ) from exc
+
+
 async def get_user_credit_balance(user_id: str) -> int:
     try:
         result = get_supabase_client().rpc(
@@ -58,6 +165,9 @@ async def get_user_credit_balance(user_id: str) -> int:
 
 
 async def deduct_credits(user_id: str, amount: int, transaction_type: str) -> None:
+    if amount <= 0:
+        return
+
     try:
         get_supabase_client().table('credit_transactions').insert(
             {

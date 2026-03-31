@@ -184,7 +184,6 @@ export default function DashboardPage() {
       <header className="sticky top-0 z-50 bg-surface/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-primary text-3xl">school</span>
             <Typography variant="title" as="h1" className="text-lg font-bold tracking-tight text-primary">
               ZahnPrep
             </Typography>
@@ -303,8 +302,8 @@ export default function DashboardPage() {
                       onChange={handleFileChange}
                       className="hidden"
                     />
-                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                      <span className="material-symbols-outlined">upload_file</span>
+                    <div className="mb-4 inline-flex rounded-full bg-primary/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.18em] text-primary">
+                      Upload Area
                     </div>
                     <Typography variant="title" as="div" className="mb-1 text-lg font-bold">
                       {file ? file.name : 'Upload PDF, image, or notes snapshot'}
@@ -314,11 +313,8 @@ export default function DashboardPage() {
                     </Typography>
                   </button>
 
-                  <div className="flex items-center gap-2 text-on-surface-variant">
-                    <span className="material-symbols-outlined text-sm text-tertiary">warning</span>
-                    <Typography variant="body" className="text-xs text-on-surface-variant">
-                      Max file size 30 MB.
-                    </Typography>
+                  <div className="rounded-full bg-tertiary/10 px-3 py-2 text-xs font-medium text-tertiary">
+                    Max file size 30 MB.
                   </div>
 
                   <button

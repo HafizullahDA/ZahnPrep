@@ -58,7 +58,7 @@ export default function SignupPage() {
         return;
       }
 
-      setMessage('Success! Check your email to confirm your account, then sign in.');
+      setMessage('Success! Check your email to confirm your account, then sign in to claim your first 30 MCQs free.');
     } catch {
       setMessage('Error: Unable to reach Supabase. Check your frontend environment variables and internet connection.');
     }
@@ -71,7 +71,6 @@ export default function SignupPage() {
       <header className="px-6 py-8">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-primary text-3xl">school</span>
             <span className="text-2xl font-black tracking-tight text-primary">ZahnPrep</span>
           </Link>
           <Link href="/auth/login">
@@ -90,12 +89,21 @@ export default function SignupPage() {
             ZahnPrep is built around a simple flow: bring your study material, generate exam-style MCQs, then revise from the exact concepts you need to retain.
           </Typography>
 
+          <div className="mb-8 inline-flex rounded-full bg-primary/10 px-4 py-2 text-sm font-bold text-primary">
+            New users get the first 30 MCQs free.
+          </div>
+
           <Surface level="low" className="rounded-[2rem] p-8">
             <Typography variant="title" as="h2" className="mb-4 text-2xl font-bold tracking-tight">
               What you unlock
             </Typography>
             <div className="space-y-4">
-              {['Upload files, screenshots, or pasted notes', 'Generate MCQs tailored to your target exam', 'Move straight into revision and simulator flows'].map((item) => (
+              {[
+                'Your first 30 MCQs free to test the workflow',
+                'Upload files, screenshots, or pasted notes',
+                'Generate MCQs tailored to your target exam',
+                'Move straight into revision and simulator flows',
+              ].map((item) => (
                 <div key={item} className="rounded-2xl bg-surface-container-lowest p-4">
                   <Typography variant="body" className="font-semibold text-on-surface">{item}</Typography>
                 </div>
@@ -110,7 +118,7 @@ export default function SignupPage() {
               Create your account.
             </Typography>
             <Typography variant="body" className="mb-8 leading-relaxed text-on-surface-variant">
-              Sign up to turn your notes into a reusable MCQ practice engine.
+              Sign up to turn your notes into a reusable MCQ practice engine and try the first 30 MCQs free.
             </Typography>
 
             {message && (

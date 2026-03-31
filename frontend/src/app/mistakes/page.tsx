@@ -66,7 +66,6 @@ export default function MistakeBookPage() {
       <header className="sticky top-0 z-50 bg-surface/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-3xl text-primary">school</span>
             <Typography variant="title" as="h1" className="text-lg font-bold tracking-tight text-primary">
               ZahnPrep
             </Typography>

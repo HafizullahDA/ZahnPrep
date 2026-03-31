@@ -12,7 +12,6 @@ export default function PricingPage() {
       <header className="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-surface/90 backdrop-blur-md">
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-primary">school</span>
             <Typography variant="title" as="h1" className="font-bold text-lg text-primary tracking-tight">ZahnPrep</Typography>
           </Link>
         </div>
@@ -39,7 +38,7 @@ export default function PricingPage() {
               <Typography variant="body" className="text-on-surface-variant text-sm">Perfect for testing the platform.</Typography>
             </div>
             <div className="mb-8">
-              <Typography variant="headline" as="div" className="text-4xl font-extrabold text-on-surface mb-2">₹0</Typography>
+              <Typography variant="headline" as="div" className="text-4xl font-extrabold text-on-surface mb-2">Rs 0</Typography>
               <Typography variant="label" className="text-xs uppercase tracking-widest text-outline">One-Time</Typography>
             </div>
             <ul className="space-y-4 mb-10 flex-1 text-sm font-medium">
@@ -60,8 +59,8 @@ export default function PricingPage() {
               <Typography variant="body" className="text-on-primary-container text-sm">For serious aspirants.</Typography>
             </div>
             <div className="mb-8">
-              <Typography variant="headline" as="div" className="text-5xl font-extrabold text-white mb-2">₹2,499<span className="text-xl text-primary-fixed/60 font-medium">/yr</span></Typography>
-              <Typography variant="label" className="text-xs uppercase tracking-widest text-primary-fixed/60 text-[10px]">Just ₹208/month</Typography>
+              <Typography variant="headline" as="div" className="text-5xl font-extrabold text-white mb-2">Rs 2,499<span className="text-xl text-primary-fixed/60 font-medium">/yr</span></Typography>
+              <Typography variant="label" className="text-xs uppercase tracking-widest text-primary-fixed/60 text-[10px]">Just Rs 208/month</Typography>
             </div>
             <ul className="space-y-4 mb-10 flex-1 text-sm font-medium text-white/90">
               <li className="flex items-center gap-3"><span className="material-symbols-outlined text-inverse-primary text-sm">check_circle</span> <strong className="text-white">2,000 Credits</strong> / month</li>
@@ -78,7 +77,7 @@ export default function PricingPage() {
               <Typography variant="body" className="text-on-surface-variant text-sm">Consistent month-to-month prep.</Typography>
             </div>
             <div className="mb-8">
-              <Typography variant="headline" as="div" className="text-4xl font-extrabold text-on-surface mb-2">₹149<span className="text-lg text-outline font-medium">/mo</span></Typography>
+              <Typography variant="headline" as="div" className="text-4xl font-extrabold text-on-surface mb-2">Rs 149<span className="text-lg text-outline font-medium">/mo</span></Typography>
               <Typography variant="label" className="text-xs uppercase tracking-widest text-outline text-[10px]">Billed Monthly</Typography>
             </div>
             <ul className="space-y-4 mb-10 flex-1 text-sm font-medium">
@@ -100,7 +99,7 @@ export default function PricingPage() {
             <div>
               <Typography variant="title" as="h4" className="text-xl font-bold mb-1">Running low on credits?</Typography>
               <Typography variant="body" className="text-sm text-on-surface-variant max-w-sm leading-relaxed">
-                Grab the <strong>₹79 Booster Pack</strong> for an instant injection of 300 Credits. Unlike subscription tokens, these credits <strong>persist until consumed.</strong>
+                Grab the <strong>Rs 79 Booster Pack</strong> for an instant injection of 300 Credits. Unlike subscription tokens, these credits <strong>persist until consumed.</strong>
               </Typography>
             </div>
           </div>

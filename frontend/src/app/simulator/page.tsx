@@ -10,7 +10,6 @@ export default function SimulatorHome() {
       <header className="bg-surface/90 sticky top-0 z-50 backdrop-blur-md">
         <div className="flex items-center justify-between px-6 h-16 w-full max-w-7xl mx-auto">
           <div className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-primary text-3xl">school</span>
             <Typography variant="title" as="h1" className="text-lg font-bold text-primary tracking-tight">ZahnPrep</Typography>
           </div>
           <div className="flex items-center gap-4">

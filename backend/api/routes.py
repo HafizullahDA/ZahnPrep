@@ -3,7 +3,14 @@ import base64
 from typing import Optional
 
 from core.config import settings
-from core.supabase_security import deduct_credits, get_user_credit_balance, verify_supabase_user
+from core.supabase_security import (
+    consume_free_mcqs,
+    deduct_credits,
+    ensure_user_profile,
+    get_free_mcqs_remaining,
+    get_user_credit_balance,
+    verify_supabase_user,
+)
 from models.schemas import GeneratedAssessment
 from services.assessment_engine import generate_mcqs
 from services.pdf_processor import extract_text_from_document
@@ -86,13 +93,22 @@ async def generate_assessment(
     normalized_text = _validate_generation_request(exam_paper_type, mcq_count, file, text_context)
 
     user_id = user.id
+    user_email = getattr(user, 'email', None)
+    await ensure_user_profile(user_id, user_email)
+
+    free_mcqs_remaining = await get_free_mcqs_remaining(user_id)
+    free_mcqs_to_use = min(mcq_count, free_mcqs_remaining)
+    paid_mcqs_to_use = mcq_count - free_mcqs_to_use
     balance = await get_user_credit_balance(user_id)
-    credits_needed = mcq_count * 15
+    credits_needed = paid_mcqs_to_use * settings.CREDITS_PER_MCQ
 
     if balance < credits_needed:
         raise HTTPException(
             status_code=status.HTTP_402_PAYMENT_REQUIRED,
-            detail=f'Insufficient credits. You have {balance}, need {credits_needed}.',
+            detail=(
+                f'Insufficient credits. You have {balance}, need {credits_needed}. '
+                f'Free MCQs remaining: {free_mcqs_remaining}.'
+            ),
         )
 
     extracted_markdown = ''
@@ -135,6 +151,7 @@ async def generate_assessment(
     try:
         mcqs_json = generate_mcqs(exam_paper_type, extracted_markdown, mcq_count)
         validated_assessment = _validate_generated_assessment(mcqs_json, mcq_count)
+        await consume_free_mcqs(user_id, free_mcqs_to_use)
         await deduct_credits(user_id, credits_needed, 'mcq_generation')
         return validated_assessment
     except HTTPException:

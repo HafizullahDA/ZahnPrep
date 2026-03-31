@@ -58,7 +58,6 @@ export default function ForgotPasswordPage() {
       <header className="px-6 py-8">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-primary text-3xl">school</span>
             <span className="text-2xl font-black tracking-tight text-primary">ZahnPrep</span>
           </Link>
           <Link href="/auth/login">
