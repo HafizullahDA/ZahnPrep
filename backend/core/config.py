@@ -1,13 +1,19 @@
-from pydantic_settings import BaseSettings
+from typing import Literal
+
+from pydantic import field_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file=".env", case_sensitive=True)
+
     PROJECT_NAME: str = "ZahnPrep AI Backend"
     API_V1_STR: str = "/api/v1"
+    ENVIRONMENT: Literal["development", "staging", "production"] = "development"
 
-    SUPABASE_URL: str = ""
-    SUPABASE_KEY: str = ""
-    GEMINI_API_KEY: str = ""
+    SUPABASE_URL: str
+    SUPABASE_KEY: str
+    GEMINI_API_KEY: str
 
     BACKEND_CORS_ORIGINS: list[str] = [
         "http://localhost:3000",
@@ -38,9 +44,16 @@ class Settings(BaseSettings):
     MAX_TEXT_CONTEXT_CHARS: int = 50_000
     MAX_EXTRACTED_CONTEXT_CHARS: int = 120_000
 
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
+    @field_validator("BACKEND_CORS_ORIGINS", mode="before")
+    @classmethod
+    def parse_cors_origins(cls, value: str | list[str]) -> list[str]:
+        if isinstance(value, str):
+            return [origin.strip() for origin in value.split(",") if origin.strip()]
+        return value
+
+    @property
+    def is_production(self) -> bool:
+        return self.ENVIRONMENT == "production"
 
 
 settings = Settings()
