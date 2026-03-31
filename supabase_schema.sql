@@ -1,79 +1,59 @@
 -- schema: supabase/schema.sql
--- Goal: Set up users, Razorpay token mechanics, and the Spaced Repetition model.
+-- Goal: Set up user profiles with friction-free onboarding (30 free MCQs)
 
--- 1. Users table (extension of auth.users)
-CREATE TABLE IF NOT EXISTS public.users (
-  id uuid PRIMARY KEY DEFAULT auth.uid() REFERENCES auth.users(id),
+-- 1. User Profiles (extension of auth.users)
+CREATE TABLE profiles (
+  id UUID REFERENCES auth.users(id) ON DELETE CASCADE PRIMARY KEY,
   email TEXT NOT NULL,
-  created_at TIMESTAMPTZ DEFAULT now()
+  free_mcqs_remaining INTEGER DEFAULT 30, -- The friction-free onboarding hook
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- 2. Token Wallet (Segregated balances for Rollover rules)
-CREATE TABLE IF NOT EXISTS public.user_credits (
-  user_id uuid PRIMARY KEY REFERENCES public.users(id),
-  subscription_balance integer DEFAULT 0,  -- Resets monthly
-  booster_balance integer DEFAULT 0,       -- Persists across billing cycles until consumed
-  updated_at TIMESTAMPTZ DEFAULT now(),
-  CONSTRAINT valid_subscription_balance CHECK (subscription_balance >= 0),
-  CONSTRAINT valid_booster_balance CHECK (booster_balance >= 0)
+-- 2. Subscriptions
+CREATE TABLE subscriptions (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE NOT NULL,
+  plan_type TEXT NOT NULL, -- e.g., 'monthly_199', 'annual_1999'
+  status TEXT NOT NULL, -- e.g., 'active', 'canceled', 'past_due'
+  current_period_start TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL,
+  current_period_end TIMESTAMP WITH TIME ZONE NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- 3. Transactions Ledger (Audit Trail)
-CREATE TABLE IF NOT EXISTS public.credit_transactions (
-  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid REFERENCES public.users(id),
-  amount integer NOT NULL, -- Negative for deduction, Positive for refill
-  transaction_type text NOT NULL, -- 'signup_gift', 'monthly_refill', 'booster_pack', 'mcq_generation', 'pdf_ocr'
-  created_at TIMESTAMPTZ DEFAULT now()
+-- 3. Credit Transactions (Audit Trail)
+CREATE TABLE credit_transactions (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  user_id UUID REFERENCES profiles(id) ON DELETE CASCADE NOT NULL,
+  amount INTEGER NOT NULL, -- Positive for adding (+2000), Negative for spending (-15)
+  transaction_type TEXT NOT NULL, -- 'monthly_reset', 'booster_79', 'pdf_upload', 'mcq_generation'
+  description TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- 4. Questions Data
-CREATE TABLE IF NOT EXISTS public.questions (
-  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  exam_type text NOT NULL, -- UPSC, SSC_CGL, JKPSC
-  subject text NOT NULL,
-  topic text NOT NULL,
-  question_text text NOT NULL,
-  options jsonb NOT NULL,
-  correct_answer text NOT NULL,
-  explanation text NOT NULL,
-  difficulty integer,
-  created_at TIMESTAMPTZ DEFAULT now()
-);
+-- 4. Function: Get User Credit Balance
+CREATE OR REPLACE FUNCTION get_user_credit_balance(target_user_id UUID)
+RETURNS INTEGER AS $$
+DECLARE
+  total_balance INTEGER;
+BEGIN
+  SELECT COALESCE(SUM(amount), 0) INTO total_balance
+  FROM credit_transactions
+  WHERE user_id = target_user_id;
+  
+  RETURN total_balance;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
 
--- 5. Mistake Book (Spaced Repetition SM-2 engine)
-CREATE TABLE IF NOT EXISTS public.mistake_book_entries (
-  id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-  user_id uuid REFERENCES public.users(id),
-  question_id uuid REFERENCES public.questions(id),
-  status text DEFAULT 'learning', -- 'learning', 'reviewing', 'mastered'
-  ease_factor real DEFAULT 2.5,
-  interval integer DEFAULT 1,
-  next_review_date TIMESTAMPTZ DEFAULT now(),
-  created_at TIMESTAMPTZ DEFAULT now(),
-  updated_at TIMESTAMPTZ DEFAULT now(),
-  UNIQUE(user_id, question_id)
-);
-
--- Automation: Grant 200 Free Credits on Signup
+-- Trigger to automatically create a profile when a new user signs up
 CREATE OR REPLACE FUNCTION public.handle_new_user() 
 RETURNS TRIGGER AS $$
 BEGIN
-  INSERT INTO public.users (id, email)
+  INSERT INTO public.profiles (id, email)
   VALUES (new.id, new.email);
-  
-  -- Grant Welcome Gift
-  INSERT INTO public.user_credits (user_id, booster_balance)
-  VALUES (new.id, 200);
-
-  -- Log Transaction
-  INSERT INTO public.credit_transactions (user_id, amount, transaction_type)
-  VALUES (new.id, 200, 'signup_gift');
-
   RETURN new;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
 
-CREATE OR REPLACE TRIGGER on_auth_user_created
+CREATE TRIGGER on_auth_user_created
   AFTER INSERT ON auth.users
   FOR EACH ROW EXECUTE PROCEDURE public.handle_new_user();

@@ -1,19 +1,22 @@
-import os
 from pydantic_settings import BaseSettings
+
 
 class Settings(BaseSettings):
     PROJECT_NAME: str = "ZahnPrep AI Backend"
     API_V1_STR: str = "/api/v1"
-    
-    # Supabase (Database and Auth)
-    SUPABASE_URL: str = os.getenv("SUPABASE_URL", "")
-    SUPABASE_KEY: str = os.getenv("SUPABASE_KEY", "")
-    
-    # Google Gemini AI Keys
-    GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+
+    SUPABASE_URL: str = ""
+    SUPABASE_KEY: str = ""
+    GEMINI_API_KEY: str = ""
+
+    BACKEND_CORS_ORIGINS: list[str] = [
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
 
     class Config:
         env_file = ".env"
         case_sensitive = True
+
 
 settings = Settings()
