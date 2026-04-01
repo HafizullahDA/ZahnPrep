@@ -205,6 +205,26 @@ export default function HomePage() {
           </div>
         </section>
       </main>
+      {/* --- START OF FOOTER --- */}
+        <footer className="w-full border-t border-gray-100 py-8 mt-16">
+          <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+            <p>© {new Date().getFullYear()} ZahnPrep. All rights reserved.</p>
+            
+            <div className="mt-4 md:mt-0 flex items-center space-x-4">
+              <a href="mailto:founder@zahnprep.com" className="text-gray-500 hover:text-teal-700 transition-colors">
+                founder@zahnprep.com
+              </a>
+              <span className="text-gray-300">|</span>
+              <div className="flex items-center space-x-1">
+                <span>Built by</span>
+                <a href="https://www.linkedin.com/in/hafiz1991" target="_blank" rel="noopener noreferrer" className="text-teal-700 hover:text-teal-900 font-medium transition-colors">
+                  Hafizullah Lone
+                </a>
+              </div>
+            </div>
+          </div>
+        </footer>
+        {/* --- END OF FOOTER --- */}
     </div>
   );
 }
