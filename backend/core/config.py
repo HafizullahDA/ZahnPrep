@@ -18,6 +18,8 @@ class Settings(BaseSettings):
     BACKEND_CORS_ORIGINS: list[str] = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
+        "https://zahnprep.com",
+        "https://www.zahnprep.com",
     ]
 
     SUPPORTED_EXAM_TYPES: list[str] = [
@@ -25,7 +27,7 @@ class Settings(BaseSettings):
         "UPSC_CSAT_PAPER_2",
         "JKPSC_GS_PAPER_1",
         "JKPSC_CSAT_PAPER_2",
-        "SSC_CGL_TIER_2",
+        "SSC_CGL_TIER_2", 
         "JKPSC",
     ]
     ALLOWED_DOCUMENT_MIME_TYPES: list[str] = [
