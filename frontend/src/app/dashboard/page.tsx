@@ -11,8 +11,8 @@ import { useExamStore } from '@/lib/store';
 import { Logo } from '@/components/ui/Logo';
 
 const EXAM_OPTIONS = [
-  { value: 'UPSC_GS_PAPER_1', label: 'UPSC Civil Services (GS Paper 1)' },
-  { value: 'SSC_CGL_TIER_2', label: 'SSC CGL (Tier 2)' },
+  { value: 'UPSC', label: 'UPSC Civil Services' },
+  { value: 'SSC_CGL', label: 'SSC CGL' },
   { value: 'JKPSC', label: 'JKPSC KAS' },
 ];
 
@@ -23,7 +23,7 @@ export default function DashboardPage() {
   const { setConfig, setQuestions } = useExamStore();
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const [examType, setExamType] = useState('UPSC_GS_PAPER_1');
+  const [examType, setExamType] = useState('UPSC');
   const [mcqCount, setMcqCount] = useState(10);
   const [file, setFile] = useState<File | null>(null);
   const [pastedText, setPastedText] = useState('');

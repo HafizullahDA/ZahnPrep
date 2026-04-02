@@ -23,11 +23,8 @@ class Settings(BaseSettings):
     ]
 
     SUPPORTED_EXAM_TYPES: list[str] = [
-        "UPSC_GS_PAPER_1",
-        "UPSC_CSAT_PAPER_2",
-        "JKPSC_GS_PAPER_1",
-        "JKPSC_CSAT_PAPER_2",
-        "SSC_CGL_TIER_2", 
+        "UPSC",
+        "SSC_CGL",
         "JKPSC",
     ]
     ALLOWED_DOCUMENT_MIME_TYPES: list[str] = [
