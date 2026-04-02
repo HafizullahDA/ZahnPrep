@@ -1,5 +1,7 @@
-from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
 import base64
+import logging
+
+from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
 from typing import Optional
 
 from core.config import settings
@@ -14,6 +16,8 @@ from core.supabase_security import (
 from models.schemas import GeneratedAssessment
 from services.assessment_engine import generate_mcqs
 from services.pdf_processor import extract_text_from_document
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
@@ -127,9 +131,10 @@ async def generate_assessment(
         except HTTPException:
             raise
         except Exception as exc:
+            logger.exception('Document extraction failed for file: %s', file.filename)
             raise HTTPException(
                 status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail='Document extraction failed.',
+                detail=f'Document extraction failed: {exc}',
             ) from exc
 
     if normalized_text:
@@ -157,12 +162,14 @@ async def generate_assessment(
     except HTTPException:
         raise
     except RuntimeError as exc:
+        logger.exception('MCQ generation RuntimeError')
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=str(exc),
         ) from exc
     except Exception as exc:
+        logger.exception('Unexpected error during question generation')
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail='Question generation failed.',
+            detail=f'Question generation failed: {exc}',
         ) from exc
