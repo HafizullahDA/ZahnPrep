@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Surface } from '@/components/ui/Surface';
 import { Typography } from '@/components/ui/Typography';
 import { Button } from '@/components/ui/Button';
+import { Logo } from '@/components/ui/Logo';
 import { useExamStore } from '@/lib/store';
 
 export default function ResultsPage() {
@@ -57,8 +58,8 @@ export default function ResultsPage() {
     <>
       <header className="fixed top-0 z-50 flex h-16 w-full items-center justify-between border-b border-outline-variant/10 bg-surface/90 px-6 backdrop-blur-md">
         <Link href="/dashboard" className="flex items-center gap-3">
-          <span className="material-symbols-outlined text-primary">menu_book</span>
-          <Typography variant="title" as="h1" className="text-lg font-bold tracking-tight text-primary">
+          <Logo className="w-8 h-8" />
+          <Typography variant="title" as="h1" className="text-xl font-bold tracking-tight text-primary">
             ZahnPrep
           </Typography>
         </Link>

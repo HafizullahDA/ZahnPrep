@@ -1,0 +1,38 @@
+import React from 'react';
+
+interface LogoProps extends React.SVGProps<SVGSVGElement> {
+  className?: string;
+}
+
+export function Logo({ className = "w-8 h-8", ...props }: LogoProps) {
+  return (
+    <svg
+      viewBox="0 0 100 100"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...props}
+    >
+      {/* Left Swoosh (Teal) */}
+      <path
+        d="M50 10 C35 25 20 50 25 75 C28 90 38 98 50 100 C36 94 30 70 48 48 C49 46 50 40 50 35 Z"
+        fill="#35A7A7"
+      />
+      {/* Right Swoosh (Dark Grey) */}
+      <path
+        d="M54 30 C65 45 80 60 75 80 C72 90 62 98 50 100 C64 94 70 70 52 48 Z"
+        fill="#5A6B72"
+      />
+      {/* Center Drop (Dark Grey) */}
+      <path
+        d="M50 48 C40 62 40 85 50 95 C60 85 60 62 50 48 Z"
+        fill="#5A6B72"
+      />
+      {/* Small Dot (Teal) */}
+      <path
+        d="M58 15 C56 18 56 22 58 24 C60 22 60 18 58 15 Z"
+        fill="#35A7A7"
+      />
+    </svg>
+  );
+}

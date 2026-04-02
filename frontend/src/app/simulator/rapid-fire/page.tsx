@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Surface } from '@/components/ui/Surface';
 import { Typography } from '@/components/ui/Typography';
 import { Button } from '@/components/ui/Button';
+import { Logo } from '@/components/ui/Logo';
 
 export default function RapidFireDrill() {
   const [timeLeft, setTimeLeft] = useState(24);
@@ -29,8 +30,8 @@ export default function RapidFireDrill() {
       <header className="fixed top-0 z-50 w-full">
         <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between bg-surface/80 px-6 backdrop-blur-md">
           <div className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-primary">psychology</span>
-            <Typography variant="title" as="h1" className="text-lg font-bold tracking-tight text-on-surface">
+            <Logo className="w-8 h-8" />
+            <Typography variant="title" as="h1" className="text-xl font-bold tracking-tight text-primary">
               ZahnPrep
             </Typography>
           </div>

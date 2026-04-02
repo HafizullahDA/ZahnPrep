@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Surface } from '@/components/ui/Surface';
 import { Typography } from '@/components/ui/Typography';
 import { supabase } from '@/lib/supabase';
+import { Logo } from '@/components/ui/Logo';
 
 // Helper component for the Eye Icon
 const EyeIcon = ({ isOpen }: { isOpen: boolean }) => {
@@ -115,6 +116,7 @@ export default function SignupPage() {
       <header className="px-6 py-8">
         <div className="mx-auto flex max-w-6xl items-center justify-between">
           <Link href="/" className="flex items-center gap-3">
+            <Logo className="w-8 h-8" />
             <span className="text-2xl font-black tracking-tight text-primary">ZahnPrep</span>
           </Link>
           <Link href="/auth/login">

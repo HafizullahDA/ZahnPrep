@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Surface } from '@/components/ui/Surface';
 import { Typography } from '@/components/ui/Typography';
 import { Button } from '@/components/ui/Button';
+import { Logo } from '@/components/ui/Logo';
 
 export default function PricingPage() {
   return (
@@ -12,7 +13,8 @@ export default function PricingPage() {
       <header className="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-surface/90 backdrop-blur-md">
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-3">
-            <Typography variant="title" as="h1" className="font-bold text-lg text-primary tracking-tight">ZahnPrep</Typography>
+            <Logo className="w-8 h-8" />
+            <Typography variant="title" as="h1" className="font-bold text-xl text-primary tracking-tight">ZahnPrep</Typography>
           </Link>
         </div>
         <div className="flex items-center gap-4">

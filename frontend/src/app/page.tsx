@@ -9,6 +9,7 @@ import { Button } from '@/components/ui/Button';
 import { Surface } from '@/components/ui/Surface';
 import { Typography } from '@/components/ui/Typography';
 import { supabase } from '@/lib/supabase';
+import { Logo } from '@/components/ui/Logo';
 
 const featureCards = [
   {
@@ -97,7 +98,8 @@ export default function HomePage() {
       <header className="sticky top-0 z-50 bg-surface/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
           <Link href="/" className="flex items-center gap-3">
-            <Typography variant="title" as="span" className="text-lg font-bold tracking-tight text-primary">
+            <Logo className="w-8 h-8" />
+            <Typography variant="title" as="span" className="text-xl font-bold tracking-tight text-primary">
               ZahnPrep
             </Typography>
           </Link>

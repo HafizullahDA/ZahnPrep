@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
 import { Surface } from '@/components/ui/Surface';
 import { Typography } from '@/components/ui/Typography';
+import { Logo } from '@/components/ui/Logo';
 
 const recentMaterials = [
   {
@@ -66,7 +67,8 @@ export default function LibraryPage() {
       <header className="sticky top-0 z-50 bg-surface/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           <div className="flex items-center gap-3">
-            <Typography variant="title" as="h1" className="text-lg font-bold tracking-tight text-primary">
+            <Logo className="w-8 h-8" />
+            <Typography variant="title" as="h1" className="text-xl font-bold tracking-tight text-primary">
               ZahnPrep
             </Typography>
           </div>
