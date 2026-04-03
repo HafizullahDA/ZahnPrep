@@ -1,4 +1,5 @@
 import json
+from functools import lru_cache
 
 from google import genai
 from google.genai import types
@@ -8,6 +9,7 @@ from core.prompt_manager import get_system_instruction
 from models.schemas import GeneratedAssessment
 
 
+@lru_cache(maxsize=1)
 def _get_client() -> genai.Client:
     if not settings.GEMINI_API_KEY:
         raise RuntimeError('GEMINI_API_KEY must be configured in backend/.env.')

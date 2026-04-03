@@ -1,5 +1,6 @@
 import json
 import base64
+from functools import lru_cache
 
 from google import genai
 from google.genai import types
@@ -12,6 +13,7 @@ class OCRResult(BaseModel):
     markdown_content: str = Field(description="The heavily structured extracted text.")
 
 
+@lru_cache(maxsize=1)
 def _get_client() -> genai.Client:
     if not settings.GEMINI_API_KEY:
         raise RuntimeError('GEMINI_API_KEY must be configured in backend/.env.')
