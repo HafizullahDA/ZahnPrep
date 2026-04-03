@@ -25,7 +25,7 @@ def extract_text_from_document(mime_type: str, base64_string: str) -> str:
     file_bytes = base64.b64decode(base64_string)
     with genai.Client(api_key=settings.GEMINI_API_KEY) as client:
         response = client.models.generate_content(
-            model='gemini-1.5-flash',
+            model='gemini-2.5-flash',
             contents=[types.Part.from_bytes(data=file_bytes, mime_type=mime_type)],
             config=types.GenerateContentConfig(
                 system_instruction=instruction,

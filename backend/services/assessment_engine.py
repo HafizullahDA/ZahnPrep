@@ -17,7 +17,7 @@ def generate_mcqs(exam_paper_type: str, context_text: str, mcq_count: int) -> di
 
     with genai.Client(api_key=settings.GEMINI_API_KEY) as client:
         response = client.models.generate_content(
-            model='gemini-1.5-pro',
+            model='gemini-2.5-pro',
             contents=context_text,
             config=types.GenerateContentConfig(
                 system_instruction=system_instruction,
