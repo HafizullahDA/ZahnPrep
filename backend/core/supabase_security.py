@@ -1,4 +1,7 @@
+import logging
 from functools import lru_cache
+
+logger = logging.getLogger(__name__)
 
 from fastapi import HTTPException, Security, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
@@ -90,9 +93,10 @@ async def ensure_user_profile(user_id: str, email: str | None) -> dict:
     except HTTPException:
         raise
     except Exception as exc:
+        logger.exception('ensure_user_profile failed for user_id=%s', user_id)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail='Profile lookup failed.',
+            detail=f'Profile lookup failed: {exc}',
         ) from exc
 
 
@@ -115,9 +119,10 @@ async def get_user_profile(user_id: str) -> dict:
     except HTTPException:
         raise
     except Exception as exc:
+        logger.exception('get_user_profile failed for user_id=%s', user_id)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail='Profile lookup failed.',
+            detail=f'Profile lookup failed: {exc}',
         ) from exc
 
 
@@ -158,9 +163,10 @@ async def get_user_credit_balance(user_id: str) -> int:
         ).execute()
         return int(result.data or 0)
     except Exception as exc:
+        logger.exception('get_user_credit_balance failed for user_id=%s', user_id)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail='Credit lookup failed.',
+            detail=f'Credit lookup failed: {exc}',
         ) from exc
 
 
