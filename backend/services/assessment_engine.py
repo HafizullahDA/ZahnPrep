@@ -16,9 +16,10 @@ def generate_mcqs(exam_paper_type: str, context_text: str, mcq_count: int) -> di
     system_instruction = get_system_instruction(exam_paper_type, mcq_count)
 
     with genai.Client(api_key=settings.GEMINI_API_KEY) as client:
+        prompt_content = f"Create UPSC/JKPSC style questions from this data (Knowledge Map or Notes):\n{context_text}"
         response = client.models.generate_content(
-            model='gemini-2.5-pro',
-            contents=context_text,
+            model='gemini-3.1-pro-preview',
+            contents=prompt_content,
             config=types.GenerateContentConfig(
                 system_instruction=system_instruction,
                 response_mime_type='application/json',

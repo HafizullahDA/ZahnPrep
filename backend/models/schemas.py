@@ -2,7 +2,9 @@ from pydantic import BaseModel, Field
 from typing import List
 
 class GeneratedQuestion(BaseModel):
-    question_text: str = Field(description="The heavily formatted question text based on the syllabus trap structure.")
+    draft_reasoning: str = Field(description="Step 1: Draft. Think through the facts and construct an initial question and 4 options.")
+    critique: str = Field(description="Step 2: Critique. Act as a skeptical examiner. Are the distractors plausible? Is it too easy?")
+    question_text: str = Field(description="Step 3: Finalize. The heavily formatted final question text based on the syllabus trap structure.")
     options: List[str] = Field(..., description="An array of exactly 4 string distractors.")
     correct_answer_index: int = Field(..., description="The zero-based index of the correct answer in the options array. Critical for UI styling.")
     explanation: str = Field(..., description="Immediate, factual breakdown or grueling markdown explanation depending on the exam type.")
